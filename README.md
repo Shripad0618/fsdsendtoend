@@ -24,3 +24,7 @@ git commit -m "this is my second commit"
 git pull : to sync up changes from online environment to github offline environmnet
 
 ```
+
+```
+linux command bash your_file_name.sh
+```
