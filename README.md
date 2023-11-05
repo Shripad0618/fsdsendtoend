@@ -14,3 +14,8 @@ git add .
 ```
 git commit -m "This is my first commit"
 ```
+
+```
+git commit -m "this is my second commit"
+
+```
