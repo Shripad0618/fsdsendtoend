@@ -19,3 +19,8 @@ git commit -m "This is my first commit"
 git commit -m "this is my second commit"
 
 ```
+
+```
+git pull : to sync up changes from online environment to github offline environmnet
+
+```
