@@ -28,3 +28,10 @@ git pull : to sync up changes from online environment to github offline environm
 ```
 linux command bash your_file_name.sh
 ```
+
+```
+python setup.py install
+
+```
+
+# another way you can mention -e . in your requirements file and you can run
