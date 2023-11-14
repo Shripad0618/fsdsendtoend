@@ -3,3 +3,6 @@ create a LICENCE file in github online. Required when we have to publish to code
 3. .sh: shell script
 3.1 used to automate of creating the environment, selecting the environment, writing pip install 
 3.2 we cannot use the shell script in git bash only. It cannot be used in command prompt
+
+4.0 to run the init_setup file: bash init_setup.sh
+4.1 sometime the environment doesn't get activated : to activate write source activate ./env
