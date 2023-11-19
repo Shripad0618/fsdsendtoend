@@ -1,8 +1,8 @@
 pandas
 numpy
 ipykernel
-sklearn
+scikit-learn
 seaborn
 
 
-#-e .
+-e .
