@@ -32,11 +32,7 @@ class Data_Ingestion:
             os.makedirs(os.path.dirname(os.path.join(self.ingestion_config.raw_data_path)),exist_ok=True)
 
             data.to_csv(self.ingestion_config.raw_data_path,index=False)
-
-
             logging.info("I have save the raw dataset in the artifact folder")
-
-
             logging.info("Train/Test Split is starting ")
 
             train_data,test_data = train_test_split(data, test_size= 0.25)
@@ -50,6 +46,9 @@ class Data_Ingestion:
             test_data.to_csv(self.ingestion_config.test_data_path,index=False)
 
             logging.info("Data ingestion part completed")
+
+            return(self.ingestion_config.train_data_path
+                   , self.ingestion_config.test_data_path)
 
 
         except:
