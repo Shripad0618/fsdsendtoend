@@ -1,30 +1,77 @@
-import pandas as pd
-import numpy as np
 import os
 import sys
+
+import pandas as pd
+import numpy as np
+
+from src.DimondPricePrediction.exception import CustomException
 from src.DimondPricePrediction.components.data_transformation import DataTransformation
 from src.DimondPricePrediction.logger import logging
-from src.DimondPricePrediction.utils.utils import save_object
+from src.DimondPricePrediction.utils.utils import load_object
+from dataclasses import dataclass
 
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
 
 @dataclass
 
-class Modeltrainerconfig:
-    trained_model_file_path = os.path.join('artifacts','model.pkl')
 
-
-class Modeltrainer:
+class PredictPipeline:
     def __init__(self):
-        self.model_trainer_config = Modeltrainerconfig()
-
+        pass
     def predict(self,features):
         try:
-            logging.info('Splitting the dependent and Independent variables from train and test data')
-            X_train,y_train, X_test,y_test = (train_arr[:,:-1],train_arr[:,-1],test_arr[:,:-1],test_arr[:,-1])
+            preprocessor_path = os.path.join("artifacts","preprocessor.pkl")
+            model_path = os.path.join("artifacts","model.pkl")
 
-            models = {'LinearRegression':LinearRegression(),'Lasso':Lasso(),'Ridge':Ridge(),"ElasticNet":ElasticNet()}
 
-            model_report:dict = evaluate_model()
-        except:
-            pass
+            preprocessor_obj = load_object(preprocessor_path)
+            model_obj = load_object(model_path)
+
+
+            scaled_data = preprocessor_obj.transform(features)
+            pred = model_obj.predict(scaled_data)
+
+            return pred 
+
+
+        except Exception as e:
+            raise CustomException(e,sys)
+        
+@dataclass
+class CustomData:
+    carat: float
+    cut: str
+    color: str
+    clarity: str
+    depth: float
+    table: float
+    x: float
+    y: float
+    z: float
+    
+
+
+    def get_data_as_dataframe(self):
+            try:
+                custom_data_input_dict = {
+                    'carat':[self.carat],
+                    'cut':[self.cut],
+                    'color':[self.color],
+                    'clarity':[self.clarity],
+                    'depth':[self.depth],
+                    'table':[self.table],
+                    'x':[self.x],
+                    'y':[self.y],
+                    'z':[self.z] }
+                """
+                carat,cut,color,clarity,depth,table,x,y,z
+                1.52,Premium,F,VS2,62.2,58.0,7.27,7.33,4.55"""
+                
+                df = pd.DataFrame(custom_data_input_dict)
+                logging.info('Dataframe Gathered')
+                return df
+            except Exception as e:
+                logging.info('Exception Occured in prediction pipeline')
+                raise CustomException(e,sys)
+
+            
