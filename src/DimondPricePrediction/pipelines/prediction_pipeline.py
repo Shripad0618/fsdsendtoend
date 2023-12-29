@@ -53,6 +53,7 @@ class CustomData:
 
     def get_data_as_dataframe(self):
             try:
+                logging.info("Single value prediction input is bein taken")
                 custom_data_input_dict = {
                     'carat':[self.carat],
                     'cut':[self.cut],
